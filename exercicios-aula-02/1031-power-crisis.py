@@ -3,21 +3,29 @@
 n = int(input())
 
 while n > 0:
-    cities = list(range(1, n+1))
-    first_city = 1
-    last_city = 13
 
-    for m in cities:
+    done = False
+    m = 1
+
+    while done == False:
+
+        cities = list(range(1, n+1))
+        pointer = 0
+        last_city = 13
         random_list = []
-        current_city = first_city
-        for city in cities:
-            if current_city > n:
-                current_city = current_city - n
+
+        while len(cities) > 0:
+
+            current_city = cities[pointer]
+            cities.remove(current_city)
             random_list.append(current_city)
-            current_city = current_city + m
-        if random_list[-1] == last_city:
-            print(random_list)
+            if len(cities) > 0:
+                pointer = (pointer + m - 1) % len(cities)
+
+        if len(random_list) == n and random_list[-1] == last_city:
+            done = True
             print(m)
-            break
+
+        m = m+1
 
     n = int(input())
